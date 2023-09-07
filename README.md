@@ -1,2 +1,3 @@
-# MERN_Ecommerce
-# MERN_Ecommerce
+# MERN Ecommerce Project
+## Project Name : Apple Shop
+
