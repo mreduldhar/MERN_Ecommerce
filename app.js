@@ -1,6 +1,8 @@
 // Basic Library Import
 const express =require('express');
 const router =require('./src/routes/api');
+require('dotenv').config();
+
 const app = express();
 
 
@@ -14,7 +16,7 @@ const hpp =require('hpp');
 const cors =require('cors');
 
 // Database Library Import
-// const mongoose =require('mongoose');
+const mongoose =require('mongoose');
 
 
 // Security Middleware Implement
@@ -33,25 +35,29 @@ app.use(express.json({limit: '50mb'}));
 app.use(express.urlencoded({extended: true}));
 
 
-
-
-
-
-
-
 // Request Rate Limit
 const limiter= rateLimit({ windowMs:15*60*1000, max:3000 })
 app.use(limiter)
 
 // Database Connection
 
+mongoose.connect(process.env.DB_URL).then(()=>{
+    console.log("Database Connected 😊",)
+}).catch((err)=>{
+    console.log("Database not Connected 😖")
+})
 
-// Routing Implement
+
+
+
+// Route Implement
 app.use("/api/v1",router)
 
 // Undefined Route Implement
 app.use("*",(req,res)=>{
     res.status(404).json({status:"fail",data:"Not Found"})
 })
+
+
 
 module.exports = app;
