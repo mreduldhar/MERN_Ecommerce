@@ -33,7 +33,7 @@ router.get('/remove-cart-list', ProductController.RemoveCartList)
 
 
 // User
-router.get('/user-login', UserController.UserLogin)
+router.get('/user-login/:email', UserController.UserLogin)
 router.get('/verify-login', UserController.VerifyLogin)
 router.get('/user-logout', UserController.UserLogout)
 
